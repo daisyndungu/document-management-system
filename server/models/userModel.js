@@ -15,7 +15,7 @@ var userModel = new Schema({
         type: String
     },
     role: {
-        type: String
+        type: Array
     }
 
 },
