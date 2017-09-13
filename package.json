@@ -6,6 +6,8 @@
   "author": "Daisy Ndungu <daisywndungu@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "^1.18.1",
     "express": "^4.15.4",
     "gulp": "^3.9.1",
     "gulp-nodemon": "^2.2.1",
