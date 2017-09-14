@@ -11,14 +11,17 @@ var app = express();
 // set port
 var port = process.env.PORT || 3000;
 
+
 // enable app to read request body
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json());
 
-// models
+// Add models
 var User = require('./server/models/userModel');
+var Document = require('./server/models/documentModel');
 
 var userRouter = require('./Routes/user')(User);
+var documentRouter = require('./Routes/documents')(Document);
 
 app.listen(port, function(){
     console.log('we are listenning to port ' + port)
@@ -26,3 +29,4 @@ app.listen(port, function(){
 
 // routes
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/documents', documentRouter);
