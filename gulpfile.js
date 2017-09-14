@@ -1,0 +1,16 @@
+// create a reference to gulp
+var gulp = require('gulp');
+    nodemon = require('gulp-nodemon');
+
+gulp.task('default', function(){
+    nodemon({
+        script: 'app.js',
+        env: {
+            PORT: 8000
+        },
+        ignore: ['../node_modules/**']
+    })
+    .on('restart', function(){
+        console.log('restated');
+    });
+});
