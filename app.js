@@ -3,7 +3,7 @@ var express = require('express'),
     bodyParser = require('body-parser');
 
 // connect to DocumentMngmntDB database
-var app = mongoose.connect('mongodb://localhost/DocumentMngmntDB')
+var app = mongoose.connect('mongodb://localhost/DocumentMngmntDB', { useMongoClient: true })
 
 // initiallize app with express
 var app = express();

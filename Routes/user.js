@@ -11,7 +11,7 @@ var routes = function(User){
             newUser.password = newUser.generateHash(req.password);
             newUser.save(function(err, user){
                 if (err) {
-                    res.status(400).send("A error occurred. Please try again");
+                    res.status(400).send("User already exists");
                 }
                 else {
                     res.status(201).send(user);
