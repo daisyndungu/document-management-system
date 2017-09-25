@@ -25,12 +25,12 @@ collection: 'users'
 
 // hash the password
 userModel.methods.generateHash = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
   };
   
 // checking if password is valid
-userModel.methods.validPassword = function(password) {
-return bcrypt.compareSync(password, this.password);
+userModel.methods.validPassword = function(password, hash) {
+return bcrypt.compareSync(password, hash);
 };
 
 module.exports = mongoose.model('User', userModel);

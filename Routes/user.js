@@ -1,4 +1,5 @@
-var express = require('express');
+var express = require('express'),
+    jwt = require('jsonwebtoken');
 
 var routes = function(User){
     var userRouter = express.Router();
@@ -8,7 +9,7 @@ var routes = function(User){
         .post(function(req, res){
             var newUser = new User(req.body);
             // hash user password
-            newUser.password = newUser.generateHash(req.password);
+            newUser.password = newUser.generateHash(req.body.password);
             newUser.save(function(err, user){
                 if (err) {
                     res.status(400).send("User already exists");
@@ -18,6 +19,29 @@ var routes = function(User){
                 }
             });
         });
+
+     // register a user
+     userRouter.route('/login')
+     .post(function(req, res){
+        User.findById(req.body._id, function(err, user){
+            if (err) {
+                res.status(400).send(err);
+            }
+            else if (user){
+                    if (user.validPassword(req.body.password, user.password)){
+                        // var token = jwt.sign(user.password, 'superSecret');
+                        res.status(200).json({
+                            message: 'Successful login!'
+                          });
+                    } else {
+                        res.status(400).send('Invalid password');
+                    }
+            }
+            else {
+                res.status(404).send('User not found');
+            }
+        })
+    });
     
     // fetch all users in DB
     userRouter.route('')
